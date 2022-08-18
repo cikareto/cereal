@@ -18,7 +18,7 @@ describe("spiralPrime/prime", () => {
 
     Object.entries(testCases).map(([num, res]) => {
       test(`${num} should not be ${res}`, () => {
-        expect(isPrime(num)).toBe(res);
+        expect(isPrime(+num)).toBe(res);
       });
     });
   });
@@ -36,7 +36,7 @@ describe("spiralPrime/prime", () => {
 
     Object.entries(testCases).map(([size, lastNum]) => {
       test(`prime number at ${size} should be ${lastNum}`, () => {
-        const primes = getPrime(size);
+        const primes = getPrime(+size);
         expect(primes.length).toBe(+size);
         expect(primes[size - 1]).toBe(lastNum);
       });
