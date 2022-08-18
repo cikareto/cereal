@@ -1,0 +1,22 @@
+{
+  "name": "my_plays",
+  "version": "1.0.0",
+  "description": "just for fun 🫣",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cikareto/my_plays.git"
+  },
+  "author": "cikreto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cikareto/my_plays/issues"
+  },
+  "homepage": "https://github.com/cikareto/my_plays#readme",
+  "devDependencies": {
+    "jest": "^28.1.3"
+  }
+}
