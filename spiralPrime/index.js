@@ -1,31 +1,5 @@
 const { getPrime } = require("./prime");
-
-/**
- * 1 2 4 6 9 12 16 20 25...
- * find maximum multiplies of size
- * */
-const findDimension = (size) => {
-  if (size <= 2) return [size, null];
-
-  const roundedSqrt = Math.round(Math.sqrt(size));
-  return roundedSqrt * roundedSqrt >= size
-    ? [roundedSqrt, roundedSqrt]
-    : [roundedSqrt + 1, roundedSqrt];
-};
-
-const calculateXAxis = (x) => x / 2;
-
-const findSpiralCentroid = (y, x) => {
-  if (!x) return [0, null];
-
-  if (x % 2 !== 0) {
-    const point = calculateXAxis(x + 1) - 1;
-    return [point, point];
-  }
-
-  const pointX = calculateXAxis(x);
-  return [pointX, y === x ? pointX - 1 : pointX];
-};
+const spiral = require("./spiral");
 
 const RIGHT = "R";
 const TOP = "T";
@@ -62,7 +36,7 @@ const makeDirection = () => {
 };
 
 const sortSpiralPrime = (primes, size) => {
-  const [row, col] = findDimension(size);
+  const [col, row] = spiral.findDimension(size);
 
   if (!col) {
     return primes;
@@ -71,7 +45,7 @@ const sortSpiralPrime = (primes, size) => {
   const sorted = Array.from(Array(col), () => new Array(row));
   const direction = makeDirection();
 
-  let [y, x] = findSpiralCentroid(row, col);
+  let [y, x] = spiral.findCentroid(col, row);
 
   primes.forEach((prime) => {
     sorted[y][x] = prime;
