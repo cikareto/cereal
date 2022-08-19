@@ -1,5 +1,6 @@
 const { getPrime } = require("./prime");
 const spiral = require("./spiral");
+const { printSpiral } = require("../utils/print");
 
 const RIGHT = "R";
 const TOP = "T";
@@ -69,7 +70,13 @@ const sortSpiralPrime = (primes, size) => {
   return sorted;
 };
 
-const getSpiralPrime = (size) => {
+const printSpiralPrime = (size) => {
   const primes = getPrime(size);
-  return sortSpiralPrime(primes, size);
+  const sortedPrimes = sortSpiralPrime(primes, size);
+
+  return printSpiral(sortedPrimes, primes[size - 1])
+};
+
+module.exports = {
+  printSpiralPrime,
 };
