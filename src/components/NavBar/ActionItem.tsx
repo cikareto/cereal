@@ -1,33 +1,36 @@
+import { Link, useLocation } from "react-router-dom";
 import cx from "classnames";
 
 export interface IActionItem {
   label: string;
-  active: boolean;
-  onClick: () => void;
+  to: string;
 }
 
-const ActionItem: React.FC<IActionItem> = ({ label, active, onClick }) => {
+const ActionItem: React.FC<IActionItem> = ({ label, to }) => {
+  const location = useLocation();
+  const isActive = location.pathname === to;
+
   return (
     <div className="flex relative ml-2">
       <div
         className={cx(
           "bg-blue w-1 h-5 rounded absolute top-[4px] -left-[8px]",
           {
-            hidden: !active,
+            hidden: !isActive,
           }
         )}
       />
-      <button
+      <Link
         className={cx(
           "w-full py-1 px-3 rounded-md text-left text-sm text-txt-default font-medium hover:bg-action-item-bg--hover",
           {
-            "font-bold bg-action-item-bg--active": active,
+            "font-bold bg-action-item-bg--active": isActive,
           }
         )}
-        onClick={onClick}
+        to={to}
       >
         <span>{label}</span>
-      </button>
+      </Link>
     </div>
   );
 };
