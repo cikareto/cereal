@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+const plugin = require("tailwindcss/plugin");
+
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -18,10 +21,26 @@ module.exports = {
         divider: "#373E47",
       },
       spacing: {
-        'gp': '1.5rem', //global padding x-axis
-        'md-gp': '4rem'
-      }
+        gp: "1.5rem", //global padding x-axis
+        "md-gp": "4rem",
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        h1: {
+          fontSize: theme("fontSize.3xl"),
+          fontWeight: 700,
+          color: "#ADBAC7",
+        },
+        h2: {
+          fontSize: theme("fontSize.2xl"),
+          fontWeight: 500,
+          color: "#ADBAC7",
+        },
+        p: { fontSize: theme("fontSize.base"), color: "#ADBAC7" },
+      });
+    }),
+  ],
 };

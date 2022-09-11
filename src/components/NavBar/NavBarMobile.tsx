@@ -1,22 +1,21 @@
 import { useState } from "react";
 import cx from "classnames";
 import { ReactComponent as HamburgerIcon } from "../../assets/hamburger-icon.svg";
-import { ReactComponent as GithubIcon } from "../../assets/github-icon.svg";
-import NavList from "./NavList";
 
-const NavBarMobile: React.FC = () => {
+import NavList from "./NavList";
+import GithubLink from "../Link/GithubLink";
+
+const NavBarMobile: React.FC<{ className?: string }> = ({ className }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <nav className="p-gp md:hidden border-b border-divider">
+    <nav className={className}>
       <div className="flex justify-between">
         <button onClick={() => setIsOpen(!isOpen)}>
           <HamburgerIcon />
         </button>
 
-        <a href="https://github.com/cikareto" target="_blank" rel="noreferrer">
-          <GithubIcon />
-        </a>
+        <GithubLink />
       </div>
 
       <div
