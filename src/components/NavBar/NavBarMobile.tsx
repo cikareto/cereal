@@ -12,7 +12,7 @@ const NavBarMobile: React.FC<{ className?: string }> = ({ className }) => {
     <nav className={className}>
       <div className="flex justify-between">
         <button onClick={() => setIsOpen(!isOpen)}>
-          <HamburgerIcon />
+          <HamburgerIcon className="hover:fill-txt-note" />
         </button>
 
         <GithubLink />
