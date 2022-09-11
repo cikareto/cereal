@@ -1,4 +1,4 @@
-import { ReactComponent as GithubIcon } from "../../../assets/github-icon.svg";
+import { GithubIcon } from "../../../assets/SVGs";
 
 const GithubLink: React.FC<{ className?: string; width?: number }> = ({
   className,
