@@ -1,6 +1,6 @@
 const { getPrime } = require("./prime");
 const spiral = require("./spiral");
-const { printSpiral } = require("../utils/print");
+const { printSpiral } = require("./print");
 
 const RIGHT = "R";
 const TOP = "T";
