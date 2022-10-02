@@ -5,6 +5,7 @@ interface ISpiralPrimeForm {
   onSubmit: (e: SyntheticEvent) => void;
 }
 
+// TODO: add form validator size >= 1
 const SpiralPrimeForm: React.FC<ISpiralPrimeForm> = ({ onSubmit }) => {
   return (
     <form onSubmit={onSubmit}>
