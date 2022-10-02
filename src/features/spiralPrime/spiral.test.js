@@ -1,4 +1,4 @@
-const { findDimension, findCentroid } = require("./spiral");
+import { findDimension, findCentroid }  from "./spiral";
 
 describe("spiralPrime/spiral", () => {
   describe("findDimension", () => {

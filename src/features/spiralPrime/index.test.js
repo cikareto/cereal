@@ -1,4 +1,4 @@
-const { printSpiralPrime } = require("./index");
+import { printSpiralPrime }  from "./index";
 
 describe("spiralPrime/index", () => {
   const testCases = [

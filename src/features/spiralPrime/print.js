@@ -4,7 +4,7 @@ const getPartition = (num, maxDigit) => {
   return partition.repeat(maxDigit - numLen + 1)
 }
 
-const printArray = (arr, maxDigit) => {
+export const printArray = (arr, maxDigit) => {
   let str = "";
   for (let i = 0; i < arr.length; i++) {
     const num = isNaN(arr[i]) ? 0 : arr[i];
@@ -15,7 +15,7 @@ const printArray = (arr, maxDigit) => {
   return str + "\n";
 };
 
-const printSpiral = (arr, largestNumber) => {
+export const printSpiral = (arr, largestNumber) => {
   let str = "";
   const maxDigit = `${largestNumber}`.length
   if (typeof arr[0] === "object") {
@@ -28,7 +28,3 @@ const printSpiral = (arr, largestNumber) => {
   return str;
 };
 
-module.exports = {
-  printArray,
-  printSpiral
-}

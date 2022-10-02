@@ -1,6 +1,6 @@
-const { getPrime } = require("./prime");
-const spiral = require("./spiral");
-const { printSpiral } = require("./print");
+import { getPrime } from "./prime";
+import { findCentroid,  findDimension} from "./spiral";
+import { printSpiral } from "./print";
 
 const RIGHT = "R";
 const TOP = "T";
@@ -37,7 +37,7 @@ const makeDirection = () => {
 };
 
 const sortSpiralPrime = (primes, size) => {
-  const [col, row] = spiral.findDimension(size);
+  const [col, row] = findDimension(size);
 
   if (!col) {
     return primes;
@@ -46,7 +46,7 @@ const sortSpiralPrime = (primes, size) => {
   const sorted = Array.from(Array(col), () => new Array(row));
   const direction = makeDirection();
 
-  let [y, x] = spiral.findCentroid(col, row);
+  let [y, x] = findCentroid(col, row);
 
   primes.forEach((prime) => {
     sorted[y][x] = prime;
@@ -64,19 +64,16 @@ const sortSpiralPrime = (primes, size) => {
       case DOWN:
         y += 1;
         break;
+      default:
     }
   });
 
   return sorted;
 };
 
-const printSpiralPrime = (size) => {
+export const printSpiralPrime = (size) => {
   const primes = getPrime(size);
   const sortedPrimes = sortSpiralPrime(primes, size);
 
   return printSpiral(sortedPrimes, primes[size - 1])
-};
-
-module.exports = {
-  printSpiralPrime,
 };

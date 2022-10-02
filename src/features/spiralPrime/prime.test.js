@@ -1,4 +1,4 @@
-const { isPrime, getPrime } = require("./prime");
+import { isPrime, getPrime } from "./prime";
 
 describe("spiralPrime/prime", () => {
   describe("isPrime", () => {
