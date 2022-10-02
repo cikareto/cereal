@@ -40,10 +40,10 @@ const sortSpiralPrime = (primes, size) => {
   const [col, row] = findDimension(size);
 
   if (!col) {
-    return primes;
+    return [primes];
   }
 
-  const sorted = Array.from(Array(col), () => new Array(row));
+  const sorted = Array.from(Array(col), () => new Array(row).fill(0));
   const direction = makeDirection();
 
   let [y, x] = findCentroid(col, row);
@@ -77,3 +77,10 @@ export const printSpiralPrime = (size) => {
 
   return printSpiral(sortedPrimes, primes[size - 1])
 };
+
+export const getSpiralPrime = (size) =>{
+  const primes = getPrime(size)
+  const sortedPrimes = sortSpiralPrime(primes, size)
+
+  return sortedPrimes
+}
