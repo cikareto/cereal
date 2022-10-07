@@ -1,26 +1,20 @@
-import { SyntheticEvent, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ResizableBox from "../../components/Box/ResizableBox";
 import { getSpiralPrime } from "../../features/spiralPrime";
 import SpiralPrimeForm from "./SpiralPrimeForm";
 
 const SpiralPrime = () => {
-  const [_size, _setSize] = useState(0);
+  const [_size, _setSize] = useState<number>(0);
 
   const spiralPrime = useMemo(() => getSpiralPrime(_size), [_size]);
 
-  const onHandleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-
-    const target = e.target as typeof e.target & {
-      size: { value: number };
-    };
-
-    _setSize(target.size.value);
+  const onHandleSubmit = (value: number) => {
+    _setSize(value);
   };
 
   return (
     <>
-      <SpiralPrimeForm onSubmit={onHandleSubmit}/>
+      <SpiralPrimeForm onSubmit={onHandleSubmit} />
 
       <div
         className={`grid gap-2 mt-4`}

@@ -12,6 +12,7 @@ module.exports = {
         navbar: "#2D333B",
         "txt-default": "#ADBAC7",
         "txt-note": "#768390",
+        "txt-error": "#FB6C57",
         "btn-primary-bg": "#373E47",
         "btn-primary-border": "#CED8EB",
         "btn-primary-bg--hover": "#444C56",

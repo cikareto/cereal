@@ -1,30 +1,54 @@
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
 import EnterButton from "../../components/Button/EnterButton";
+import ErrorMessage from "../../components/Text/ErrorMessage";
 
 interface ISpiralPrimeForm {
-  onSubmit: (e: SyntheticEvent) => void;
+  onSubmit: (value: number) => void;
 }
 
-// TODO: add form validator size >= 1
 const SpiralPrimeForm: React.FC<ISpiralPrimeForm> = ({ onSubmit }) => {
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
+  const isValid = (value: number) => !!value;
+
+  const _onHandleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    const target = e.target as typeof e.target & {
+      size: { value: number };
+    };
+
+    const { value } = target.size;
+
+    if (isValid(value)) {
+      onSubmit(value);
+      setErrorMsg("\u00A0");
+    } else {
+      setErrorMsg("Size must have a value.");
+    }
+  };
+
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={_onHandleSubmit}>
       <label
-        className="block uppercase tracking-wide text-txt-default text-xs font-bold mb-2"
+        className="block uppercase tracking-wide text-blue text-xs font-bold mb-2 pl-4"
         htmlFor="spiral-prime_size"
       >
-        Size
+        Size *
       </label>
-      <div className="flex gap-4">
-        <input
-          id="spiral-prime_size"
-          className="appearance-none block bg-gray-200 text-gray-700 border rounded leading-tight focus:outline-none focus:bg-white py-1 px-4"
-          name="size"
-          type="number"
-          aria-label="Prime Size"
-        />
+      <div className="flex gap-3">
+        <div className="border-b border-blue">
+          <input
+            id="spiral-prime_size"
+            className="appearance-none block bg-transparent text-white border-none rounded leading-tight focus:outline-none py-1 px-4"
+            name="size"
+            type="number"
+            aria-label="Prime Size"
+          />
+        </div>
         <EnterButton />
       </div>
+      <ErrorMessage>{errorMsg}</ErrorMessage>
     </form>
   );
 };
