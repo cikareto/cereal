@@ -8,13 +8,9 @@ const SpiralPrime = () => {
 
   const spiralPrime = useMemo(() => getSpiralPrime(_size), [_size]);
 
-  const onHandleSubmit = (value: number) => {
-    _setSize(value);
-  };
-
   return (
     <>
-      <SpiralPrimeForm onSubmit={onHandleSubmit} />
+      <SpiralPrimeForm onSubmit={_setSize} />
 
       <div
         className={`grid gap-2 mt-4`}

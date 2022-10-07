@@ -4,7 +4,7 @@
    rgba(83, 155, 245, 1) 5px -3px;
 }
 
-#btn-enter:active {
+#btn-enter:not(:disabled):active {
   transform: skewX(-10deg) translate(5px, -3px) scale(0.95);
   box-shadow: rgba(80, 148, 233, 1) 3px -1px;
 }
