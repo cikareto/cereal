@@ -15,8 +15,8 @@ const NavList: React.FC<INavList> = ({ className }) => {
       <li>
         <ActionItem label={home.name} to={home.path} />
         <Divider />
-        {Object.values(routes).map((route) => (
-          <ActionItem label={route.name} to={route.path} />
+        {Object.values(routes).map(({ name, path }) => (
+          <ActionItem key={`nav-item-${name}`} label={name} to={path} />
         ))}
       </li>
     </ul>

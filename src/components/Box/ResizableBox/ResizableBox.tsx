@@ -18,9 +18,9 @@ const ResizableBox: React.FC<{
       <text
         x="50%"
         y="50%"
-        dominant-baseline="middle"
-        text-anchor="middle"
-        font-size="25"
+        dominantBaseline="middle"
+        textAnchor="middle"
+        fontSize="25"
         fill={color}
       >
         {children}

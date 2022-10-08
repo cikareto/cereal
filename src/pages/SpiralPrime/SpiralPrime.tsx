@@ -22,20 +22,17 @@ const SpiralPrime = () => {
           gridTemplateColumns: `repeat(${spiralPrime[0]?.length}, minmax(0, 1fr))`,
         }}
       >
-        {spiralPrime.map((row: [number]) => {
-          return (
-            <>
-              {row.map((col: number) => (
-                <ResizableBox
-                  className="bg-blue rounded-md"
-                  style={{ maxWidth: "5rem" }}
-                >
-                  {col}
-                </ResizableBox>
-              ))}
-            </>
-          );
-        })}
+        {spiralPrime.map((row: [number]) =>
+          row.map((col: number, i: number) => (
+            <ResizableBox
+              key={i}
+              className="bg-blue rounded-md"
+              style={{ maxWidth: "5rem" }}
+            >
+              {col}
+            </ResizableBox>
+          ))
+        )}
       </div>
     </>
   );
