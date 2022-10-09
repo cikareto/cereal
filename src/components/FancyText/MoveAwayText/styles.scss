@@ -1,0 +1,36 @@
+.move-away-text {
+  position: relative;
+
+  animation: shaking 0.5s ease-in-out infinite;
+  animation-play-state: paused;
+
+  &:hover {
+    animation-play-state: running;
+  }
+}
+
+@keyframes shaking {
+  0% {
+    transform: translate3d(5px, 3px, 10px);
+  }
+  30% {
+    transform: translate3d(
+      calc(var(--translate-x) - 5px),
+      calc(var(--translate-x) - 10px),
+      8px
+    );
+  }
+  60% {
+    transform: translate3d(
+      calc(var(--translate-x) + 5px),
+      calc(var(--translate-x) + 10px),
+      5px
+    );
+  }
+  90% {
+    transform: translate3d(-5px, -3px, 2px);
+  }
+  10% {
+    transform: translate3d(0, 0, 0);
+  }
+}

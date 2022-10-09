@@ -1,0 +1,11 @@
+.dancin-text {
+  position: relative;
+
+  -webkit-transition: transform 0.2s ease;
+  -moz-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translate(var(--translate-x), var(--translate-y)) scale(0.9);
+  }
+}
