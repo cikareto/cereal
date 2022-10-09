@@ -11,6 +11,7 @@ type TRoute = {
   name: string;
   component: ComponentType;
   exact?: boolean;
+  skipHeader?: boolean;
 };
 
 interface IRoute {
@@ -22,7 +23,7 @@ interface IRoute {
 }
 
 export const ROUTES: IRoute = {
-  home: { path: "/", name: "About me", component: Home },
+  home: { path: "/", name: "About ✨", component: Home, skipHeader: true },
   prime: { path: "/prime", name: "Prime", component: SpiralPrime },
   foo: { path: "/foo", name: "Foo", component: Foo },
   bar: { path: "/bar", name: "Bar", component: Bar },
@@ -32,24 +33,26 @@ export const ROUTES: IRoute = {
 const Router = () => {
   return (
     <Routes>
-      {Object.values(ROUTES).map(({ name, component, ...rest }) => (
-        <Route
-          key={`route-${name}`}
-          element={withHeader(component)(name)}
-          {...rest}
-        />
-      ))}
+      {Object.values(ROUTES).map(
+        ({ name, skipHeader, component, ...rest }: TRoute) => (
+          <Route
+            key={`route-${name}`}
+            element={withHeader(component)(name, skipHeader)}
+            {...rest}
+          />
+        )
+      )}
     </Routes>
   );
 };
 
 const withHeader = (Component: ComponentType) => {
-  return (routeName: string) => (
+  return (routeName: string, skipHeader: boolean = false) => (
     <>
-      <h2 className="mb-2">{routeName}</h2>
+      {!skipHeader && <h2 className="mb-2">{routeName}</h2>}
       <Component />
     </>
-  )
-}
+  );
+};
 
 export default Router;
