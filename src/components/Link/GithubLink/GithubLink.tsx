@@ -6,7 +6,7 @@ const GithubLink: React.FC<{ className?: string; width?: number }> = ({
 }) => (
   <a
     className={className}
-    href="https://github.com/cikareto"
+    href="https://github.com/sgennrw"
     target="_blank"
     rel="noreferrer"
   >
