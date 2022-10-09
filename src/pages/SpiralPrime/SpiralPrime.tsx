@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
-import ResizableBox from "../../components/Box/ResizableBox";
+import cx from "classnames";
+import ResizableTextBox from "../../components/Box/ResizableTextBox";
 import { getSpiralPrime } from "../../features/spiralPrime";
 import SpiralPrimeForm from "./SpiralPrimeForm";
 
@@ -8,25 +9,37 @@ const SpiralPrime = () => {
 
   const spiralPrime = useMemo(() => getSpiralPrime(_size), [_size]);
 
+  const rowLength = spiralPrime[0]?.length;
+
   return (
     <>
       <SpiralPrimeForm onSubmit={_setSize} />
 
       <div
-        className={`grid gap-2 mt-4`}
+        className={cx(`grid mt-4`, {
+          "gap-1 md:gap-2": rowLength < 25,
+          "gap-0.5 md:gap-1": rowLength >= 25,
+        })}
         style={{
-          gridTemplateColumns: `repeat(${spiralPrime[0]?.length}, minmax(0, 1fr))`,
+          gridTemplateColumns: `repeat(${Math.max(
+            rowLength,
+            12
+          )}, minmax(0, 1fr))`,
         }}
       >
         {spiralPrime.map((row: [number]) =>
           row.map((col: number, i: number) => (
-            <ResizableBox
+            <ResizableTextBox
               key={i}
-              className="bg-blue rounded-md"
+              className={cx("bg-blue rounded-md", {
+                "col-start-1": i === 0,
+                "bg-sky-blue": col === 2,
+                "bg-dark-blue": col === 0,
+              })}
               style={{ maxWidth: "5rem" }}
             >
-              {col}
-            </ResizableBox>
+              {col === 0 ? "" : col}
+            </ResizableTextBox>
           ))
         )}
       </div>

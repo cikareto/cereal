@@ -9,6 +9,8 @@ module.exports = {
       colors: {
         dark: "#22272E",
         blue: "#539BF5",
+        "sky-blue": "#1AC8ED",
+        "dark-blue": "#3b6192",
         navbar: "#2D333B",
         error: "#FB6C57",
         "txt-default": "#ADBAC7",

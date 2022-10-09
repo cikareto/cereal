@@ -1,6 +1,6 @@
 import { CSSProperties, ReactNode } from "react";
 
-const ResizableBox: React.FC<{
+const ResizableTextBox: React.FC<{
   className?: string;
   style?: CSSProperties;
   color?: string;
@@ -29,4 +29,4 @@ const ResizableBox: React.FC<{
   </div>
 );
 
-export default ResizableBox;
+export default ResizableTextBox;
