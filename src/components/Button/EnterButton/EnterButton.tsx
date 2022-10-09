@@ -1,4 +1,4 @@
-import "./style.css";
+import "./styles.scss";
 
 const EnterButton: React.FC<{ disabled?: boolean }> = ({ disabled }) => {
   return (
