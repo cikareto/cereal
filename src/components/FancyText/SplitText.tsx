@@ -16,7 +16,7 @@ const SplitText: React.FC<ISplitText> = ({
 }) => {
   return (
     <>
-      {Array.from(text).map((letter) => {
+      {Array.from(text).map((letter, i) => {
         const style = {
           "--translate-x": Math.random() * translateX - translateX / 2 + "px",
           "--translate-y": Math.random() * translateY - translateY / 2 + "px",
@@ -24,7 +24,7 @@ const SplitText: React.FC<ISplitText> = ({
 
         return (
           <div
-            key={`${text}-${letter}`}
+            key={`${text}-${i}`}
             className={cx(type, "inline-block cursor-default")}
             style={style}
           >

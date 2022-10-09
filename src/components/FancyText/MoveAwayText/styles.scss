@@ -11,6 +11,9 @@
 
 @keyframes shaking {
   0% {
+    transform: translate3d(0, 0, 0);
+  }
+  10% {
     transform: translate3d(5px, 3px, 10px);
   }
   30% {
@@ -30,7 +33,7 @@
   90% {
     transform: translate3d(-5px, -3px, 2px);
   }
-  10% {
-    transform: translate3d(0, 0, 0);
+  100% {
+    transform: translate3d(var(--translate-x), var(--translate-x), 0);
   }
 }
