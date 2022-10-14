@@ -27,8 +27,8 @@ const SpiralPrime = () => {
           )}, minmax(0, 1fr))`,
         }}
       >
-        {spiralPrime.map((row: [number]) =>
-          row.map((col: number, i: number) => (
+        {spiralPrime?.map((row: (number | null)[]) =>
+          row?.map((col: number | null, i: number) => (
             <ResizableTextBox
               key={i}
               className={cx("bg-blue rounded-md", {

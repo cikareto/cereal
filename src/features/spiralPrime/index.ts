@@ -1,5 +1,5 @@
 import { getPrime } from "./prime";
-import { findCentroid,  findDimension} from "./spiral";
+import { findCentroid, findDimension } from "./spiral";
 import { printSpiral } from "./print";
 
 const RIGHT = "R";
@@ -36,7 +36,7 @@ const makeDirection = () => {
   };
 };
 
-const sortSpiralPrime = (primes, size) => {
+const sortSpiralPrime = (primes: number[], size: number) => {
   const [col, row] = findDimension(size);
 
   if (!col) {
@@ -46,9 +46,9 @@ const sortSpiralPrime = (primes, size) => {
   const sorted = Array.from(Array(col), () => new Array(row).fill(0));
   const direction = makeDirection();
 
-  let [y, x] = findCentroid(col, row);
+  let [y, x]: any = findCentroid(col, row);
 
-  primes.forEach((prime) => {
+  primes.forEach((prime: number) => {
     sorted[y][x] = prime;
 
     switch (direction.get()) {
@@ -71,16 +71,16 @@ const sortSpiralPrime = (primes, size) => {
   return sorted;
 };
 
-export const printSpiralPrime = (size) => {
+export const printSpiralPrime = (size: number) => {
   const primes = getPrime(size);
   const sortedPrimes = sortSpiralPrime(primes, size);
 
-  return printSpiral(sortedPrimes, primes[size - 1])
+  return printSpiral(sortedPrimes, primes[size - 1]);
 };
 
-export const getSpiralPrime = (size) =>{
-  const primes = getPrime(size)
-  const sortedPrimes = sortSpiralPrime(primes, size)
+export const getSpiralPrime = (size: number) => {
+  const primes = getPrime(size);
+  const sortedPrimes = sortSpiralPrime(primes, size);
 
-  return sortedPrimes
-}
+  return sortedPrimes;
+};

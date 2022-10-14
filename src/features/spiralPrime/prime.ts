@@ -1,4 +1,4 @@
-export const isPrime = (num) => {
+export const isPrime = (num: number) => {
   if (num > 2 && num % 2 === 0) return false;
 
   for (let i = 3; i <= Math.sqrt(num); i += 2) {
@@ -8,7 +8,7 @@ export const isPrime = (num) => {
   return num > 1;
 };
 
-export const getPrime = (size) => {
+export const getPrime = (size: number) => {
   if (size === 0) return [];
 
   let count = 0,

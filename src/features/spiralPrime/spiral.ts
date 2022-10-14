@@ -2,7 +2,7 @@
  * 1 2 4 6 9 12 16 20 25...
  * find maximum multiplies of size
  * */
-export const findDimension = (size) => {
+export const findDimension = (size: number) => {
   if (size <= 2) return [null, size];
 
   const roundedSqrt = Math.round(Math.sqrt(size));
@@ -11,7 +11,7 @@ export const findDimension = (size) => {
     : [roundedSqrt, roundedSqrt + 1];
 };
 
-export const findCentroid = (x, y) => {
+export const findCentroid = (x: number | null, y: number | null) => {
   if (!x) return [0, null];
 
   if (x % 2 !== 0) {
@@ -23,4 +23,4 @@ export const findCentroid = (x, y) => {
   return [pointX, y === x ? pointX - 1 : pointX];
 };
 
-const calculateXAxis = (x) => x / 2;
+const calculateXAxis = (x: number) => x / 2;
