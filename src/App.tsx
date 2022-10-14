@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Router from "./Router";
 
-import NavBar, { Header } from "./components/NavBar";
+import NavBar, { Header } from "./layouts/NavBar";
 
 const ContentWrapper: React.FC<{ children: ReactNode }> = ({ children }) => (
   <div className="m-6 lg:m-0 lg:ml-10 lg:col-span-9 xl:col-span-10">

@@ -1,7 +1,7 @@
 import cx from "classnames";
 import { ROUTES } from "../../Router";
 import ActionItem from "./ActionItem";
-import Divider from "../Divider";
+import Divider from "../../components/Divider";
 
 interface INavList {
   className?: string;

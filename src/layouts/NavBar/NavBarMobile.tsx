@@ -2,7 +2,7 @@ import { useState } from "react";
 import cx from "classnames";
 
 import NavList from "./NavList";
-import GithubLink from "../Link/GithubLink";
+import GithubLink from "../../components/Link/GithubLink";
 import { HamburgerIcon } from "../../assets/SVGs";
 
 const NavBarMobile: React.FC<{ className?: string }> = ({ className }) => {

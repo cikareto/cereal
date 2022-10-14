@@ -1,4 +1,4 @@
-import GithubLink from "../Link/GithubLink";
+import GithubLink from "../../components/Link/GithubLink";
 import NavList from "./NavList";
 
 export const NavBarDesktopHeader: React.FC = () => (
