@@ -13,6 +13,7 @@ const SpiralPrime = () => {
 
   return (
     <>
+      <h2 className="page-header">Spiral Prime</h2>
       <SpiralPrimeForm onSubmit={_setSize} />
 
       <div

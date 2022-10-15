@@ -27,6 +27,15 @@ module.exports = {
         gp: "1.5rem", //global padding x-axis
         "md-gp": "4rem",
       },
+      animation: {
+        "underline-blink": "underline-blink .5s infinite ease-in-out",
+      },
+      keyframes: {
+        "underline-blink": {
+          "0%": { "text-decoration": "underline" },
+          "100%": { "text-decoration": "none" },
+        },
+      },
     },
   },
   plugins: [
