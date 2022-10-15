@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import EnterButton from "../../components/Button/EnterButton";
+import TrafficJam from "../../components/TrafficJam";
+import useGameState from "../../hooks/useGameState";
 import Quote from "./Quote";
 
 interface ITypingState {
@@ -7,15 +10,19 @@ interface ITypingState {
   word: string;
 }
 
+const initTypingState: ITypingState = {
+  currentPos: 0,
+  countError: 0,
+  word: "",
+};
+
 const TypeRacer = () => {
   const mock = "Never accept ultimatums, conventional wisdom, or absolutes.";
   const [quote, setQuote] = useState<string[]>([]);
 
-  const [typingState, setTypingState] = useState<ITypingState>({
-    currentPos: 0,
-    countError: 0,
-    word: "",
-  });
+  const [{ state: gameState, countdown }, game] = useGameState();
+
+  const [typingState, setTypingState] = useState<ITypingState>(initTypingState);
 
   const _onDelete = useCallback(
     ({ currentPos, countError, word }: ITypingState) => {
@@ -42,10 +49,8 @@ const TypeRacer = () => {
     [quote]
   );
 
-  const _onHandleKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      const { key } = e;
-
+  const _onRacing = useCallback(
+    (key: string) => {
       if (key.length !== 1 && key !== "Backspace") {
         return;
       }
@@ -64,6 +69,10 @@ const TypeRacer = () => {
           currentPos: currentPos + 1,
           word: key === " " ? "" : word + key,
         });
+
+        if (currentPos + 1 === quote.length) {
+          game.onFinished();
+        }
       } else {
         setTypingState({
           ...typingState,
@@ -72,14 +81,37 @@ const TypeRacer = () => {
         });
       }
     },
-    [quote, typingState, _onDelete]
+    [_onDelete, game, quote, typingState]
+  );
+
+  const _onReady = useCallback(() => {
+    game.onReady(5000);
+    setTypingState(initTypingState);
+  }, [game]);
+
+  const _onEnter = useCallback(
+    (key: string) => {
+      if (key === "Enter") {
+        _onReady();
+      }
+    },
+    [_onReady]
+  );
+
+  const _onHandleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      const { key } = e;
+
+      if (gameState.started) {
+        _onRacing(key);
+      } else {
+        _onEnter(key);
+      }
+    },
+    [_onEnter, _onRacing, gameState.started]
   );
 
   useEffect(() => {
-    if (typingState.currentPos === quote.length) {
-      return;
-    }
-
     window.addEventListener("keydown", _onHandleKeyDown);
 
     return () => {
@@ -92,19 +124,36 @@ const TypeRacer = () => {
   }, []);
 
   return (
-    <div>
-      <h2 className="page-header">Type Racer 🏎💨</h2>
+    <>
+      <div className="flex justify-between">
+        <h2 className="page-header">Type Racer 🏎💨</h2>
+        <EnterButton
+          label={`Press Enter to Start ${gameState.finished ? "Again" : ""}`}
+          icon={<span className="ml-2">🏁</span>}
+          disabled={gameState.started || countdown.isCounting}
+          onClick={_onReady}
+        />
+      </div>
       <div className="mt-4 p-8 border border-dashed border-divider rounded-md">
         <Quote
           quote={quote}
+          disabled={gameState.ready}
           currentPos={typingState.currentPos}
           isError={typingState.countError > 0}
         />
       </div>
-      <p className="underline underline-offset-2 px-8 py-4 mt-4 text-xl bg-slate-900 rounded-md h-16">
-        {typingState.word}
-      </p>
-    </div>
+      <div className="flex justify-between items-center px-8 py-3 mt-4 bg-slate-900 rounded-md h-16">
+        <p className="underline underline-offset-2 text-xl text-txt-default">
+          {typingState.word}
+        </p>
+        <div className="flex h-full items-center gap-2">
+          {countdown.timer > 0 && (
+            <p className="font-bold">{countdown.timer / 1000} s</p>
+          )}
+          <TrafficJam disabled={gameState.ready} timer={countdown.timer} />
+        </div>
+      </div>
+    </>
   );
 };
 
