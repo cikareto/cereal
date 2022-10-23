@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { getQuote } from "../../apis/quote";
 import EnterButton from "../../components/Button/EnterButton";
 import TrafficJam from "../../components/TrafficJam";
 import useGameState from "../../hooks/useGameState";
@@ -17,12 +18,29 @@ const initTypingState: ITypingState = {
 };
 
 const TypeRacer = () => {
-  const mock = "Never accept ultimatums, conventional wisdom, or absolutes.";
-  const [quote, setQuote] = useState<string[]>([]);
+  const [{ quote, loading }, setQuote] = useState<{
+    quote: string[];
+    loading: boolean;
+  }>({
+    quote: [],
+    loading: false,
+  });
 
   const [{ state: gameState, countdown }, game] = useGameState();
 
   const [typingState, setTypingState] = useState<ITypingState>(initTypingState);
+
+  const fetchQuote = (callback?: () => void) => {
+    setQuote({ quote: [], loading: true });
+
+    const _getQuote = async () => {
+      const quote = await getQuote();
+      setQuote({ quote: quote.split(""), loading: false });
+      callback && callback();
+    };
+
+    _getQuote();
+  };
 
   const _onDelete = useCallback(
     ({ currentPos, countError, word }: ITypingState) => {
@@ -85,9 +103,13 @@ const TypeRacer = () => {
   );
 
   const _onReady = useCallback(() => {
-    game.onReady(5000);
+    if (gameState.finished) {
+      fetchQuote(() => game.onReady(5000));
+    } else {
+      game.onReady(5000);
+    }
     setTypingState(initTypingState);
-  }, [game]);
+  }, [game, gameState.finished]);
 
   const _onEnter = useCallback(
     (key: string) => {
@@ -120,7 +142,7 @@ const TypeRacer = () => {
   }, [_onHandleKeyDown, quote.length, typingState.currentPos]);
 
   useLayoutEffect(() => {
-    setQuote(mock.split(""));
+    fetchQuote();
   }, []);
 
   return (
@@ -135,12 +157,16 @@ const TypeRacer = () => {
         />
       </div>
       <div className="mt-4 p-8 border border-dashed border-divider rounded-md">
-        <Quote
-          quote={quote}
-          disabled={gameState.ready}
-          currentPos={typingState.currentPos}
-          isError={typingState.countError > 0}
-        />
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          <Quote
+            quote={quote}
+            disabled={gameState.ready}
+            currentPos={typingState.currentPos}
+            isError={typingState.countError > 0}
+          />
+        )}
       </div>
       <div className="flex justify-between items-center px-8 py-3 mt-4 bg-slate-900 rounded-md h-16">
         <p className="underline underline-offset-2 text-xl text-txt-default">
@@ -150,7 +176,10 @@ const TypeRacer = () => {
           {countdown.timer > 0 && (
             <p className="font-bold">{countdown.timer / 1000} s</p>
           )}
-          <TrafficJam disabled={gameState.ready} timer={countdown.timer} />
+          <TrafficJam
+            disabled={gameState.ready || loading}
+            timer={countdown.timer}
+          />
         </div>
       </div>
     </>
