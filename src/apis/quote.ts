@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const quotesURL = process.env.REACT_APP_QUOTES_API;
+const quotesURL = import.meta.env.VITE_QUOTES_API;
 
 const client = axios.create({
   baseURL: quotesURL,
