@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
     "@types/node": "^16.11.58",
     "@types/react": "^18.0.19",
     "@types/react-dom": "^18.0.6",
@@ -24,7 +23,8 @@
   "scripts": {
     "start": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "test": "vite test"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jest": "^27.5.2",
     "@vitejs/plugin-react": "^3.0.1",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.16",
