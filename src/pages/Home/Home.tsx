@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import cx from "classnames";
 import DancinText from "../../components/FancyText/DancinText";
 import content from "./content";
@@ -32,7 +32,7 @@ const Home = () => {
 
   const renderContent = () =>
     content.map((content, i) => {
-      if (i <= currentIdx) return content;
+      if (i <= currentIdx) return <Fragment key={i}>{content}</Fragment>;
       return null;
     });
 

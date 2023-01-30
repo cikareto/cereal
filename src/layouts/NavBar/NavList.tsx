@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { ROUTES } from "../../Router";
+import { ROUTES } from "../../pages/root";
 import ActionItem from "./ActionItem";
 import Divider from "../../components/Divider";
 
